@@ -31,7 +31,7 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate ci
-        git clone https://${GITLAB_TOKEN_NAME}:${GITLAB_TOKEN}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x
+        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x
         git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x
         git clone https://github.com/Simple-Robotics/proxnlp.git
         git clone https://github.com/Simple-Robotics/proxddp.git
