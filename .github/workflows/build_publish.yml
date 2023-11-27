@@ -32,8 +32,8 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate ci
-        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x
-        git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x
-        git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023
-        git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023
+        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
+        git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
+        git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
+        git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
         ls
