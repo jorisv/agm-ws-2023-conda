@@ -1,0 +1,124 @@
+{% set name = "proxddp" %}
+{% set version = "0.2.3" %}
+
+package:
+  name: {{ name|lower }}-split
+  version: {{ version }}
+
+source:
+  path: ../../../../../proxddp
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - proxddp
+
+outputs:
+  - name: proxddp
+    script: build_proxddp.bat  # [win]
+    script: build_proxddp.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("proxddp", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+      host:
+        - eigen
+        - eigenpy
+        - libboost-devel
+        - libboost-python-devel
+        - pinocchio-devel =2.99.0
+        - proxnlp-devel
+        - python
+        - numpy
+        - matplotlib
+      run:
+        - eigen
+        - eigenpy
+        - python
+        - {{ pin_compatible('numpy') }}
+        - matplotlib
+        - typed-argument-parser
+
+    files:
+      - lib/libproxddp*.dylib                   # [osx]
+      - lib/libproxddp*.so*                     # [linux]
+      - Library/bin/proxddp.dll                 # [win]
+      - lib/python*/site-packages/proxddp/**/*  # [unix]
+      - Lib/site-packages/proxddp               # [win]
+
+    test:
+      commands:
+        - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+      imports:
+        - proxddp
+
+  - name: proxddp-devel
+    script: build_proxddp.bat  # [win]
+    script: build_proxddp.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("proxddp", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+      host:
+        - eigen
+        - eigenpy
+        - libboost-devel
+        - libboost-python-devel
+        - proxnlp-devel
+        - pinocchio-devel =2.99.0
+        - crocoddyl =2.99.0
+        - python
+        - numpy
+        - matplotlib
+      run:
+        - eigen
+        - eigenpy
+        - python
+        - {{ pin_compatible('numpy') }}
+        - matplotlib
+        - typed-argument-parser
+
+    files:
+      - lib/libproxddp*.dylib                      # [osx]
+      - lib/libproxddp*.so*                        # [linux]
+      - Library/bin/proxddp.dll                    # [win]
+      - lib/python*/site-packages/proxddp/**/*     # [unix]
+      - Lib/site-packages/proxddp                  # [win]
+      - include/proxddp                            # [unix]
+      - Library/include/proxddp                    # [win]
+      - lib/pkgconfig/proxddp*.pc                  # [unix]
+      - lib/cmake/proxddp                          # [unix]
+      - Library/lib/proxddp.lib                    # [win]
+      - Library/lib/pkgconfig/proxddp*.pc          # [win]
+      - Library/lib/cmake/proxddp                  # [win]
+
+    test:
+      requires:
+        - pkg-config
+      commands:
+        - pkg-config --modversion {{ name }}
+        - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+      imports:
+        - proxddp
+
+about:
+  home: https://github.com/Simple-Robotics/proxddp
+  summary: A primal-dual augmented Lagrangian-type trajectory optimization solver.
+
+extra:
+  recipe-maintainers:
+    - olivier-roussel

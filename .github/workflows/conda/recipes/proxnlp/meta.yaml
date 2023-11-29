@@ -1,0 +1,125 @@
+{% set name = "proxnlp" %}
+{% set version = "0.2.3" %}
+
+package:
+  name: {{ name|lower }}-split
+  version: {{ version }}
+
+source:
+  path: ../../../../../proxnlp
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - proxnlp
+
+outputs:
+  - name: proxnlp
+    script: build_proxnlp.bat  # [win]
+    script: build_proxnlp.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("proxnlp", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+      host:
+        - eigen
+        - eigenpy
+        - libboost-devel
+        - libboost-python-devel
+        - fmt
+        - pinocchio-devel =2.99.0
+        - python
+        - numpy
+      run:
+        - eigen
+        - eigenpy
+        - python
+        - {{ pin_compatible('numpy') }}
+        - matplotlib
+        - typed-argument-parser
+        - tqdm
+        - meshcat-python
+
+    files:
+      - lib/libproxnlp*.dylib                   # [osx]
+      - lib/libproxnlp*.so*                     # [linux]
+      - Library/bin/proxnlp.dll                 # [win]
+      - lib/python*/site-packages/proxnlp/**/*  # [unix]
+      - Lib/site-packages/proxnlp               # [win]
+
+    test:
+      commands:
+        - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+      imports:
+        - proxnlp
+
+  - name: proxnlp-devel
+    script: build_proxnlp.bat  # [win]
+    script: build_proxnlp.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("proxnlp", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+      host:
+        - eigen
+        - eigenpy
+        - libboost-devel
+        - libboost-python-devel
+        - fmt
+        - pinocchio-devel =2.99.0
+        - python
+        - numpy
+      run:
+        - eigen
+        - eigenpy
+        - python
+        - {{ pin_compatible('numpy') }}
+        - matplotlib
+        - typed-argument-parser
+        - tqdm
+        - meshcat-python
+
+    files:
+      - lib/libproxnlp*.dylib                      # [osx]
+      - lib/libproxnlp*.so*                        # [linux]
+      - Library/bin/proxnlp.dll                    # [win]
+      - lib/python*/site-packages/proxnlp/**/*     # [unix]
+      - Lib/site-packages/proxnlp                  # [win]
+      - include/proxnlp                            # [unix]
+      - Library/include/proxnlp                    # [win]
+      - lib/pkgconfig/proxnlp*.pc                  # [unix]
+      - lib/cmake/proxnlp                          # [unix]
+      - Library/lib/proxnlp.lib                    # [win]
+      - Library/lib/pkgconfig/proxnlp*.pc          # [win]
+      - Library/lib/cmake/proxnlp                  # [win]
+
+    test:
+      requires:
+        - pkg-config
+      commands:
+        - pkg-config --modversion {{ name }}
+        - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+      imports:
+        - proxnlp
+
+about:
+  home: https://github.com/Simple-Robotics/proxnlp
+  summary: A primal-dual augmented Lagrangian-type solver for nonlinear programming on manifolds.
+
+extra:
+  recipe-maintainers:
+    - olivier-roussel

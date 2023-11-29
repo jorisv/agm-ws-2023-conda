@@ -1,0 +1,71 @@
+{% set name = "hpp-fcl" %}
+{% set version = "2.99.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../../../../hpp-fcl
+  patches:
+    - patches/0001-Bump-to-agm-ws-2023-pre-release-2.99.0-version.patch
+
+build:
+  number: 0
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x.x') }}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - clang  # [win]
+    - make   # [not win]
+    - doxygen
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
+    - pylatexenc  # [not win]
+    - lxml        # [not win]
+  host:
+    - eigen
+    - libboost-python-devel
+    - python
+    - eigenpy
+    - assimp
+    - octomap
+    - numpy
+    - pylatexenc  # [not win]
+    - lxml        # [not win]
+    - qhull
+  run:
+    - assimp
+    - eigen
+    - octomap
+    - python
+    - eigenpy
+    - {{ pin_compatible('numpy') }}
+    - qhull
+
+test:
+  requires:
+    - pkg-config
+  imports:
+    - hppfcl
+  commands:
+    - pkg-config --modversion {{ name }}
+    - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [unix]
+
+about:
+  home: https://github.com/humanoid-path-planner/hpp-fcl
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: An extension of the Flexible Collision Library
+  dev_url: https://github.com/humanoid-path-planner/hpp-fcl
+
+extra:
+  recipe-maintainers:
+    - jcarpent
+    - wolfv
+    - ymontmarin

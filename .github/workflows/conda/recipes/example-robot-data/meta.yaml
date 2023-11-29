@@ -1,0 +1,55 @@
+{% set name = "example-robot-data" %}
+{% set version = "4.99.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../../../../example-robot-data
+  patches:
+    - patches/0001-Bump-to-agm-ws-2023-special-4.99.8-version.patch
+
+build:
+  number: 1
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x') }}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}  # [not win]
+    - vs2017_win-64  # [win64]
+    - vs2017_win-32  # [win32]
+    - cmake
+    - make  # [not win]
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
+    - pinocchio-devel =2.99.0                # [build_platform != target_platform]
+  host:
+    - python
+    - pinocchio-devel =2.99.0
+    - numpy
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+
+test:
+  requires:
+    - pkg-config
+  commands:
+    - pkg-config --modversion {{ name }}
+  imports:
+    - example_robot_data
+
+about:
+  home: http://github.com/Gepetto/example-robot-data
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Set of robot URDFs for benchmarking and developed examples
+  dev_url: https://github.com/Gepetto/example-robot-data
+
+extra:
+  recipe-maintainers:
+    - jcarpent

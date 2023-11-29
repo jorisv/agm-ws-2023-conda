@@ -1,0 +1,25 @@
+From f4a5af6b97ef42e205de669349852b43385696db Mon Sep 17 00:00:00 2001
+From: Olivier Roussel <olivier.roussel@inria.fr>
+Date: Tue, 28 Nov 2023 11:48:28 +0100
+Subject: [PATCH] Bump to agm-ws-2023 special 4.99.8 version.
+
+---
+ package.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package.xml b/package.xml
+index b87c451..808c21b 100644
+--- a/package.xml
++++ b/package.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <package format="3">
+   <name>example-robot-data</name>
+-  <version>4.0.8</version>
++  <version>4.99.8</version>
+   <description>Set of robot URDFs for benchmarking and developed examples.</description>
+   <!-- The maintainer listed here is for the ROS release to receive emails for the buildfarm.
+   Please check the repository URL for project maintainer. -->
+-- 
+2.34.1
+

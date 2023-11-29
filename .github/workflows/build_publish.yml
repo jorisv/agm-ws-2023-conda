@@ -36,4 +36,11 @@ jobs:
         git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
-        ls
+        ls -al
+
+    - name: Build Conda packages
+      shell: bash -l {0}
+      run: |
+        conda activate ci
+        cd .github/workflows/conda/recipes
+        conda build hpp-fcl

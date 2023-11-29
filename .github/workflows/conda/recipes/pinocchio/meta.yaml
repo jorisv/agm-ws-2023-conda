@@ -1,0 +1,145 @@
+{% set name = "pinocchio" %}
+{% set version = "2.99.0" %}
+
+package:
+  name: {{ name|lower }}-split
+  version: {{ version }}
+
+source:
+  path: ../../../../../pinocchio
+  patches:
+    - patches/0001-Bump-to-agm-ws-2023-pre-release-2.99.0-version.patch
+
+build:
+  # TODO reset to 0
+  number: 1
+
+requirements:
+  run:
+     - pinocchio =2.99.0
+
+outputs:
+  - name: pinocchio
+    script: build_pinocchio.bat  # [win]
+    script: build_pinocchio.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("pinocchio", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
+      host:
+        - eigen
+        - eigenpy
+        - urdfdom
+        - hpp-fcl =2.99.0
+        - libboost-devel
+        - libboost-python-devel
+        - python
+        - llvm-openmp  # [not win]
+        - numpy
+        - casadi
+      run:
+        - eigen
+        - eigenpy
+        - urdfdom
+        - hpp-fcl =2.99.0
+        - python
+        - llvm-openmp  # [not win]
+        - {{ pin_compatible('numpy') }}
+        - console_bridge
+
+    files:
+      - lib/libpinocchio*.dylib                   # [osx]
+      - lib/libpinocchio*.so*                     # [linux]
+      - Library/bin/pinocchio.dll                 # [win]
+      - lib/python*/site-packages/pinocchio/**/*  # [unix]
+      - Lib/site-packages/pinocchio               # [win]
+
+    test:
+      commands:
+        - test -f $PREFIX/lib/lib{{ name }}_double${SHLIB_EXT}  # [not win]
+      imports:
+        - pinocchio
+
+  - name: pinocchio-devel
+    script: build_pinocchio.bat  # [win]
+    script: build_pinocchio.sh   # [not win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("pinocchio", max_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - clang  # [win]
+        - ninja  # [win]
+        - make   # [not win]
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
+      host:
+        - eigen
+        - eigenpy
+        - urdfdom
+        - hpp-fcl =2.99.0
+        - libboost-devel
+        - libboost-python-devel
+        - python
+        - llvm-openmp  # [not win]
+        - numpy
+        - casadi
+      run:
+        - eigen
+        - eigenpy
+        - urdfdom
+        - hpp-fcl =2.99.0
+        - python
+        - llvm-openmp  # [not win]
+        - {{ pin_compatible('numpy') }}
+        - console_bridge
+
+    files:
+      - lib/libpinocchio*.dylib                   # [osx]
+      - lib/libpinocchio*.so*                     # [linux]
+      - Library/bin/pinocchio.dll                 # [win]
+      - lib/python*/site-packages/pinocchio/**/*  # [unix]
+      - Lib/site-packages/pinocchio               # [win]
+      - include/pinocchio                         # [unix]
+      - Library/include/pinocchio                 # [win]
+      - lib/pkgconfig/pinocchio*.pc               # [unix]
+      - lib/cmake/pinocchio                       # [unix]
+      - Library/lib/pinocchio.lib                 # [win]
+      - Library/lib/pkgconfig/pinocchio*.pc       # [win]
+      - Library/lib/cmake/pinocchio               # [win]
+
+    test:
+      requires:
+        - pkg-config
+      commands:
+        - pkg-config --modversion {{ name }}
+        - test -f $PREFIX/lib/lib{{ name }}_double${SHLIB_EXT}  # [not win]
+      imports:
+        - pinocchio
+
+about:
+  home: http://github.com/stack-of-tasks/pinocchio
+  license: BSD-2-Clause
+  license_family: BSD
+  license_file: COPYING.LESSER
+  summary: A fast and flexible implementation of Rigid Body Dynamics algorithms and their analytical derivatives
+  dev_url: https://github.com/stack-of-tasks/pinocchio
+
+extra:
+  recipe-maintainers:
+    - jcarpent
+    - wolfv
+    - lesteve
+    - ymontmarin
