@@ -41,15 +41,44 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate ci
-        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
         git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
+        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
+        git clone https://github.com/Gepetto/example-robot-data.git -b v4.0.8 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
         ls -al
 
-    - name: Build Conda packages
+    - name: Build hpp-fcl conda package
       shell: bash -l {0}
       run: |
         conda activate ci
         cd .github/workflows/conda/recipes
         conda build hpp-fcl
+
+    - name: Build pinocchio conda package
+      shell: bash -l {0}
+      run: |
+        conda activate ci
+        cd .github/workflows/conda/recipes
+        conda build pinocchio
+
+    - name: Build example-robot-data conda package
+      shell: bash -l {0}
+      run: |
+        conda activate ci
+        cd .github/workflows/conda/recipes
+        conda build example-robot-data
+
+    - name: Build proxnlp conda package
+      shell: bash -l {0}
+      run: |
+        conda activate ci
+        cd .github/workflows/conda/recipes
+        conda build proxnlp
+
+    - name: Build proxddp conda package
+      shell: bash -l {0}
+      run: |
+        conda activate ci
+        cd .github/workflows/conda/recipes
+        conda build proxddp

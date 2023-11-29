@@ -80,7 +80,6 @@ outputs:
         - libboost-python-devel
         - proxnlp-devel
         - pinocchio-devel =2.99.0
-        - crocoddyl =2.99.0
         - python
         - numpy
         - matplotlib
