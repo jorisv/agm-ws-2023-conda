@@ -27,8 +27,7 @@ cmake ${CMAKE_ARGS} .. \
       -DBUILD_TESTING=OFF \
       -DPYTHON_EXECUTABLE=$PYTHON
 
-make -j16
-# make -j${CPU_COUNT}
+make -j${CPU_COUNT}
 make install
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == 1 ]]; then
