@@ -25,7 +25,7 @@ jobs:
       with:
         activate-environment: ci
         auto-update-conda: true
-        environment-file: .github/workflows/conda/environment.yml
+        environment-file: conda/environment.yml
         python-version: ${{ matrix.python-version }}
         miniforge-version: latest
 
@@ -52,33 +52,33 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd .github/workflows/conda/recipes
+        cd conda/recipes
         conda build hpp-fcl
 
     - name: Build pinocchio conda package
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd .github/workflows/conda/recipes
+        cd conda/recipes
         conda build pinocchio
 
     - name: Build example-robot-data conda package
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd .github/workflows/conda/recipes
+        cd conda/recipes
         conda build example-robot-data
 
     - name: Build proxnlp conda package
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd .github/workflows/conda/recipes
+        cd conda/recipes
         conda build proxnlp
 
     - name: Build proxddp conda package
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd .github/workflows/conda/recipes
+        cd conda/recipes
         conda build proxddp

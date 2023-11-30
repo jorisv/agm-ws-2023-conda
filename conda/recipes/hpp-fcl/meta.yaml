@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: ../../../../../hpp-fcl
+  path: ../../../hpp-fcl
   patches:
     - patches/0001-Bump-to-agm-ws-2023-pre-release-2.99.0-version.patch
 

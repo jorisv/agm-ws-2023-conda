@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: ../../../../../proxnlp
+  path: ../../../proxnlp
 
 build:
   number: 0

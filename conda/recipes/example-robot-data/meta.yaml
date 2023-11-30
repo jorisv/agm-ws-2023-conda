@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: ../../../../../example-robot-data
+  path: ../../../example-robot-data
   patches:
     - patches/0001-Bump-to-agm-ws-2023-special-4.99.8-version.patch
 
