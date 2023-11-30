@@ -54,31 +54,40 @@ jobs:
         conda activate ci
         cd conda/recipes
         conda build hpp-fcl
+        echo "OUT_PACKAGES=$(conda build hpp-fcl --output)" >> $GITHUB_ENV
 
-    - name: Build pinocchio conda package
+    # - name: Build pinocchio conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate ci
+    #     cd conda/recipes
+    #     conda build pinocchio
+
+    # - name: Build example-robot-data conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate ci
+    #     cd conda/recipes
+    #     conda build example-robot-data
+
+    # - name: Build proxnlp conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate ci
+    #     cd conda/recipes
+    #     conda build proxnlp
+
+    # - name: Build proxddp conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate ci
+    #     cd conda/recipes
+    #     conda build proxddp
+
+    - name: Publish packages
       shell: bash -l {0}
       run: |
         conda activate ci
-        cd conda/recipes
-        conda build pinocchio
-
-    - name: Build example-robot-data conda package
-      shell: bash -l {0}
-      run: |
-        conda activate ci
-        cd conda/recipes
-        conda build example-robot-data
-
-    - name: Build proxnlp conda package
-      shell: bash -l {0}
-      run: |
-        conda activate ci
-        cd conda/recipes
-        conda build proxnlp
-
-    - name: Build proxddp conda package
-      shell: bash -l {0}
-      run: |
-        conda activate ci
-        cd conda/recipes
-        conda build proxddp
+        export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+        echo ${{ env.OUT_PACKAGES }}
+        sh scripts/upload_packages.sh
