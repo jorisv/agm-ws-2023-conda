@@ -11,8 +11,7 @@ source:
     - patches/0001-Bump-to-agm-ws-2023-pre-release-2.99.0-version.patch
 
 build:
-  # TODO reset to 0
-  number: 1
+  number: 0
 
 requirements:
   run:
@@ -59,7 +58,7 @@ outputs:
     files:
       - lib/libpinocchio*.dylib                   # [osx]
       - lib/libpinocchio*.so*                     # [linux]
-      - Library/bin/pinocchio.dll                 # [win]
+      - Library/bin/pinocchio*.dll                # [win]
       - lib/python*/site-packages/pinocchio/**/*  # [unix]
       - Lib/site-packages/pinocchio               # [win]
 
