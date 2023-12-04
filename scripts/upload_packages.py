@@ -1,7 +1,7 @@
 from subprocess import run
 import os
 
-packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'proxnlp', 'proxddp']
+packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp']
 
 # collect all generated conda packages
 out_packages = []

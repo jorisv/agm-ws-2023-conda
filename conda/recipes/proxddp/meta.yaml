@@ -36,6 +36,7 @@ outputs:
         - libboost-python-devel
         - pinocchio-devel =2.99.0
         - proxnlp-devel
+        - crocoddyl =2.99.1
         - python
         - numpy
         - matplotlib
@@ -78,8 +79,9 @@ outputs:
         - eigenpy
         - libboost-devel
         - libboost-python-devel
-        - proxnlp-devel
         - pinocchio-devel =2.99.0
+        - proxnlp-devel
+        - crocoddyl =2.99.1
         - python
         - numpy
         - matplotlib
