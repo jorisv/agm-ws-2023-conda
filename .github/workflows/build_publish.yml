@@ -25,11 +25,17 @@ jobs:
       with:
         activate-environment: agm-ws-2023-py${{ matrix.python-version }}
         auto-update-conda: true
-        environment-file: conda/environment.yml
         python-version: ${{ matrix.python-version }}
         miniforge-version: latest
 
+    - name: Install conda environment
+      shell: bash -l {0}
+      run: |
+        conda activate agm-ws-2023-py${{ matrix.python-version }}
+        conda install anaconda-client conda-build -c conda-forge
+
     - name: Show conda config
+      shell: bash -l {0}
       run: |
         conda info
         conda list
@@ -57,42 +63,42 @@ jobs:
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build hpp-fcl
+        conda build hpp-fcl -c conda-forge
 
     - name: Build pinocchio conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build pinocchio
+        conda build pinocchio -c conda-forge
 
     - name: Build example-robot-data conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build example-robot-data
+        conda build example-robot-data -c conda-forge
 
     - name: Build crocoddyl conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build crocoddyl
+        conda build crocoddyl -c conda-forge
 
     - name: Build proxnlp conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build proxnlp
+        conda build proxnlp -c conda-forge
 
     - name: Build proxddp conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build proxddp
+        conda build proxddp -c conda-forge
 
     - name: Publish packages
       shell: bash -l {0}
