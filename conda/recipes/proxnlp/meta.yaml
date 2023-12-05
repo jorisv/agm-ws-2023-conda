@@ -38,6 +38,7 @@ outputs:
         - pinocchio-devel =2.99.0
         - python
         - numpy
+        - benchmark
       run:
         - eigen
         - eigenpy
@@ -83,6 +84,7 @@ outputs:
         - pinocchio-devel =2.99.0
         - python
         - numpy
+        - benchmark
       run:
         - eigen
         - eigenpy
@@ -92,20 +94,6 @@ outputs:
         - typed-argument-parser
         - tqdm
         - meshcat-python
-
-    files:
-      - lib/libproxnlp*.dylib                      # [osx]
-      - lib/libproxnlp*.so*                        # [linux]
-      - Library/bin/proxnlp.dll                    # [win]
-      - lib/python*/site-packages/proxnlp/**/*     # [unix]
-      - Lib/site-packages/proxnlp                  # [win]
-      - include/proxnlp                            # [unix]
-      - Library/include/proxnlp                    # [win]
-      - lib/pkgconfig/proxnlp*.pc                  # [unix]
-      - lib/cmake/proxnlp                          # [unix]
-      - Library/lib/proxnlp.lib                    # [win]
-      - Library/lib/pkgconfig/proxnlp*.pc          # [win]
-      - Library/lib/cmake/proxnlp                  # [win]
 
     test:
       requires:
