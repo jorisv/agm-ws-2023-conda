@@ -49,11 +49,7 @@ jobs:
         git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
         git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
         git clone https://github.com/Gepetto/example-robot-data.git -b v4.0.8 --recursive
-        git clone https://github.com/loco-3d/crocoddyl.git --recursive
-        cd crocoddyl/
-        git checkout f28102b4
-        git submodule update --init
-        cd ..
+        git clone https://github.com/jorisv/crocoddyl.git -b topic/fix-stub-gen --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
         ls -al

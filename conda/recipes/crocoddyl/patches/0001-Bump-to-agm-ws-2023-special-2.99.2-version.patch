@@ -1,22 +1,22 @@
-From 2634410a5684948ddfcec1bf0965c0b93fc8442f Mon Sep 17 00:00:00 2001
+From 1bf72caccf6c6f9b76f0946dcd9fd68af9e4ec8e Mon Sep 17 00:00:00 2001
 From: Olivier Roussel <olivier.roussel@inria.fr>
-Date: Mon, 4 Dec 2023 15:21:00 +0100
-Subject: [PATCH] Bump to agm-ws-2023 special 2.99.1 version.
+Date: Wed, 6 Dec 2023 15:37:21 +0100
+Subject: [PATCH] Bump to agm-ws-2023 special 2.99.2 version.
 
 ---
  package.xml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/package.xml b/package.xml
-index c763f927..847e03b5 100644
+index 7b174a31..e9aa2dab 100644
 --- a/package.xml
 +++ b/package.xml
 @@ -1,7 +1,7 @@
  <?xml version="1.0"?>
  <package format="3">
    <name>crocoddyl</name>
--  <version>2.0.1</version>
-+  <version>2.99.1</version>
+-  <version>2.0.2</version>
++  <version>2.99.2</version>
    <description>Crocoddyl optimal control library</description>
    <!-- The maintainers listed here are for receiving emails e.g. from the ROS buildfarm.
    Please check the README.md at the repository URL for additional detail. -->
