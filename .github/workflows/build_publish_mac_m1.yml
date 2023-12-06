@@ -1,4 +1,4 @@
-name: Build and publish conda packages
+name: Build and publish conda packages for Mac M1
 
 on: [push, pull_request]
 
