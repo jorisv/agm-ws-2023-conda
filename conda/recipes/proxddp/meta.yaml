@@ -11,10 +11,6 @@ source:
 build:
   number: 0
 
-requirements:
-  run:
-    - proxddp
-
 outputs:
   - name: proxddp
     script: build_proxddp.bat  # [win]
@@ -92,20 +88,6 @@ outputs:
         - {{ pin_compatible('numpy') }}
         - matplotlib
         - typed-argument-parser
-
-    files:
-      - lib/libproxddp*.dylib                      # [osx]
-      - lib/libproxddp*.so*                        # [linux]
-      - Library/bin/proxddp.dll                    # [win]
-      - lib/python*/site-packages/proxddp/**/*     # [unix]
-      - Lib/site-packages/proxddp                  # [win]
-      - include/proxddp                            # [unix]
-      - Library/include/proxddp                    # [win]
-      - lib/pkgconfig/proxddp*.pc                  # [unix]
-      - lib/cmake/proxddp                          # [unix]
-      - Library/lib/proxddp.lib                    # [win]
-      - Library/lib/pkgconfig/proxddp*.pc          # [win]
-      - Library/lib/cmake/proxddp                  # [win]
 
     test:
       requires:

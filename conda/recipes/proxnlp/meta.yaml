@@ -11,10 +11,6 @@ source:
 build:
   number: 0
 
-requirements:
-  run:
-    - proxnlp
-
 outputs:
   - name: proxnlp
     script: build_proxnlp.bat  # [win]

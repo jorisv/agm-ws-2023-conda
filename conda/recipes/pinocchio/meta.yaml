@@ -13,10 +13,6 @@ source:
 build:
   number: 0
 
-requirements:
-  run:
-     - pinocchio =2.99.0
-
 outputs:
   - name: pinocchio
     script: build_pinocchio.bat  # [win]
