@@ -32,7 +32,7 @@ outputs:
         - libboost-python-devel
         - pinocchio-devel =2.99.0
         - proxnlp-devel
-        - crocoddyl =2.99.1
+        - crocoddyl =2.99.2
         - python
         - numpy
         - matplotlib
@@ -45,11 +45,12 @@ outputs:
         - typed-argument-parser
 
     files:
-      - lib/libproxddp*.dylib                   # [osx]
-      - lib/libproxddp*.so*                     # [linux]
-      - Library/bin/proxddp.dll                 # [win]
-      - lib/python*/site-packages/proxddp/**/*  # [unix]
-      - Lib/site-packages/proxddp               # [win]
+      - lib/libproxddp*.dylib                            # [osx]
+      - lib/libproxddp*.so*                              # [linux]
+      - Library/bin/proxddp.dll                          # [win]
+      - lib/python*/site-packages/proxddp/**/*           # [unix]
+      - lib/python*/site-packages/proxddp-examples/**/*  # [unix]
+      - Lib/site-packages/proxddp                        # [win]
 
     test:
       commands:
@@ -77,7 +78,7 @@ outputs:
         - libboost-python-devel
         - pinocchio-devel =2.99.0
         - proxnlp-devel
-        - crocoddyl =2.99.1
+        - crocoddyl =2.99.2
         - python
         - numpy
         - matplotlib

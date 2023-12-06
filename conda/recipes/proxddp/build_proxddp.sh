@@ -18,3 +18,10 @@ cmake ${CMAKE_ARGS} .. \
 
 make -j${CPU_COUNT}
 make install
+
+# copy python examples
+EXAMPLES_DIR=${PREFIX}/lib/python${PY_VER}/site-packages/proxddp-examples
+cp -rf ../examples ${EXAMPLES_DIR}
+rm -rf ${EXAMPLES_DIR}/*.hpp
+rm -rf ${EXAMPLES_DIR}/*.cpp
+rm -rf ${EXAMPLES_DIR}/*.txt
