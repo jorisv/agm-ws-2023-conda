@@ -2,11 +2,17 @@ from subprocess import run
 import os
 
 packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp']
+py_ver = os.getenv('PYTHON_VERSION')
+numpy_ver = os.getenv('NUMPY_VERSION')
 
 # collect all generated conda packages
 out_packages = []
 for package in packages:
-  out_packages.append(run("conda build --output conda/recipes/" + package, capture_output=True, shell=True, text=True).stdout.split())
+  data = run(["conda", "build", "--py", py_ver, "--numpy", numpy_ver, "--output", "conda/recipes/" + package, "-c", "conda-forge"], capture_output=True, shell=False, text=True)
+  print('Output:' + data.stdout)
+  if(data.stderr):
+    print('Error:' + data.stderr)
+  out_packages.append(data.stdout.split())
 
 out_packages_flat = [item for sublist in out_packages for item in sublist]
 
