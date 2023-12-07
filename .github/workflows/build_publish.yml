@@ -12,7 +12,17 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         build_type: [Release]
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        # python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.11"]
+        include:
+          # - python-version: "3.8"
+          #   numpy-version: "1.22"
+          # - python-version: "3.9"
+          #   numpy-version: "1.22"
+          # - python-version: "3.10"
+          #   numpy-version: "1.22"
+          - python-version: "3.11"
+            numpy-version: "1.23"
 
     steps:
     - uses: actions/checkout@v3
@@ -58,42 +68,42 @@ jobs:
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build hpp-fcl -c conda-forge
+        conda build hpp-fcl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build pinocchio conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build pinocchio -c conda-forge
+        conda build pinocchio --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build example-robot-data conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build example-robot-data -c conda-forge
+        conda build example-robot-data --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build crocoddyl conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build crocoddyl -c conda-forge
+        conda build crocoddyl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build proxnlp conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build proxnlp -c conda-forge
+        conda build proxnlp --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build proxddp conda package
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         cd conda/recipes
-        conda build proxddp -c conda-forge
+        conda build proxddp --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Publish packages
       shell: bash -l {0}
