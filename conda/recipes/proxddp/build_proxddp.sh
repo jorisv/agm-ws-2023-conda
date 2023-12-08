@@ -20,7 +20,7 @@ make -j${CPU_COUNT}
 make install
 
 # copy python examples
-EXAMPLES_DIR=${PREFIX}/lib/python${PY_VER}/site-packages/proxddp-examples
+EXAMPLES_DIR=${PREFIX}/lib/python${PY_VER}/site-packages/proxddp_examples
 cp -rf ../examples ${EXAMPLES_DIR}
 rm -rf ${EXAMPLES_DIR}/*.hpp
 rm -rf ${EXAMPLES_DIR}/*.cpp
