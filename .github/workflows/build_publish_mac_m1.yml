@@ -33,6 +33,7 @@ jobs:
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
         conda install anaconda-client conda-build -c conda-forge
+        conda install hpp-fcl proxnlp pinocchio crocoddyl example-robot-data -c agm-ws-2023
 
     - name: Show conda config
       shell: bash -l {0}
@@ -47,48 +48,48 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
-        git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
-        git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
-        git clone https://github.com/Gepetto/example-robot-data.git -b v4.0.8 --recursive
-        git clone https://github.com/jorisv/crocoddyl.git -b topic/fix-stub-gen --recursive
-        git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
+        # git clone https://github.com/humanoid-path-planner/hpp-fcl.git -b hppfcl3x --recursive
+        # git clone https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.inria.fr/jucarpen/pinocchio -b pinocchio-3x --recursive
+        # git clone https://github.com/Gepetto/example-robot-data.git -b v4.0.8 --recursive
+        # git clone https://github.com/jorisv/crocoddyl.git -b topic/fix-stub-gen --recursive
+        # git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
         ls -al
 
-    - name: Build hpp-fcl conda package
-      shell: bash -l {0}
-      run: |
-        conda activate agm-ws-2023-py${{ matrix.python-version }}
-        cd conda/recipes
-        conda build hpp-fcl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+    # - name: Build hpp-fcl conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate agm-ws-2023-py${{ matrix.python-version }}
+    #     cd conda/recipes
+    #     conda build hpp-fcl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
-    - name: Build pinocchio conda package
-      shell: bash -l {0}
-      run: |
-        conda activate agm-ws-2023-py${{ matrix.python-version }}
-        cd conda/recipes
-        conda build pinocchio --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+    # - name: Build pinocchio conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate agm-ws-2023-py${{ matrix.python-version }}
+    #     cd conda/recipes
+    #     conda build pinocchio --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
-    - name: Build example-robot-data conda package
-      shell: bash -l {0}
-      run: |
-        conda activate agm-ws-2023-py${{ matrix.python-version }}
-        cd conda/recipes
-        conda build example-robot-data --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+    # - name: Build example-robot-data conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate agm-ws-2023-py${{ matrix.python-version }}
+    #     cd conda/recipes
+    #     conda build example-robot-data --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
-    - name: Build crocoddyl conda package
-      shell: bash -l {0}
-      run: |
-        conda activate agm-ws-2023-py${{ matrix.python-version }}
-        cd conda/recipes
-        conda build crocoddyl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+    # - name: Build crocoddyl conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate agm-ws-2023-py${{ matrix.python-version }}
+    #     cd conda/recipes
+    #     conda build crocoddyl --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
-    - name: Build proxnlp conda package
-      shell: bash -l {0}
-      run: |
-        conda activate agm-ws-2023-py${{ matrix.python-version }}
-        cd conda/recipes
-        conda build proxnlp --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+    # - name: Build proxnlp conda package
+    #   shell: bash -l {0}
+    #   run: |
+    #     conda activate agm-ws-2023-py${{ matrix.python-version }}
+    #     cd conda/recipes
+    #     conda build proxnlp --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
     - name: Build proxddp conda package
       shell: bash -l {0}

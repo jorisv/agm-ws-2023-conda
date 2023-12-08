@@ -1,7 +1,8 @@
 from subprocess import run
 import os
 
-packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp']
+packages = ['proxddp']
+# packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp']
 py_ver = os.getenv('PYTHON_VERSION')
 numpy_ver = os.getenv('NUMPY_VERSION')
 
