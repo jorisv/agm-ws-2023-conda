@@ -1,0 +1,25 @@
+From 99ec77a33fdda9f582fa66cc35b1f0f1e65baeb4 Mon Sep 17 00:00:00 2001
+From: Olivier Roussel <olivier.roussel@inria.fr>
+Date: Mon, 11 Dec 2023 09:17:02 +0100
+Subject: [PATCH] Bump to agm-ws-2023 special 0.99.2 version.
+
+---
+ package.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package.xml b/package.xml
+index 2365a71..9e646a5 100644
+--- a/package.xml
++++ b/package.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <package format="3">
+   <name>mim_solvers</name>
+-  <version>0.0.2</version>
++  <version>0.99.2</version>
+   <description>Numerical solvers of the Machines in Motion Laboratory.</description>
+   <maintainer email="sk8001@nyu.edu">Sébastien Kleff</maintainer>
+   <author email="sk8001@nyu.edu">Sébastien Kleff</author>
+-- 
+2.34.1
+

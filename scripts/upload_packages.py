@@ -1,7 +1,7 @@
 from subprocess import run
 import os
 
-packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp']
+packages = ['hpp-fcl', 'pinocchio', 'example-robot-data', 'crocoddyl', 'proxnlp', 'proxddp', 'mim-solvers']
 py_ver = os.getenv('PYTHON_VERSION')
 numpy_ver = os.getenv('NUMPY_VERSION')
 
@@ -19,6 +19,6 @@ out_packages_flat = [item for sublist in out_packages for item in sublist]
 # filter runtime packages and upload them to Anaconda dedicated channel
 for package in out_packages_flat:
   if '-devel' not in package and '-split' not in package:
-    os.system('anaconda -t ' + os.getenv('ANACONDA_API_TOKEN') + ' upload --force --user agm-ws-2023 ' + package)
+    os.system('anaconda -t ' + os.getenv('ANACONDA_API_TOKEN') + ' upload --force --user agm-ws-2023-2 ' + package)
   else:
     print('Skipping package ', package, '...')

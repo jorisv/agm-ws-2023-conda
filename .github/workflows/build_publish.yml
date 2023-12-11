@@ -60,6 +60,7 @@ jobs:
         git clone https://github.com/jorisv/crocoddyl.git -b topic/fix-stub-gen --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxnlp.git -b agimus-ws-2023 --recursive
         git clone https://${{ secrets.GH_TOKEN_NAME }}:${{ secrets.GH_TOKEN }}@github.com/Simple-Robotics/proxddp.git -b agimus-ws-2023 --recursive
+        git clone https://github.com/machines-in-motion/mim_solvers.git -b v0.0.2 --recursive
         ls -al
 
     - name: Build hpp-fcl conda package
@@ -104,11 +105,18 @@ jobs:
         cd conda/recipes
         conda build proxddp --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
 
+    - name: Build mim-solvers conda package
+      shell: bash -l {0}
+      run: |
+        conda activate agm-ws-2023-py${{ matrix.python-version }}
+        cd conda/recipes
+        conda build mim-solvers --py ${{ matrix.python-version }} --numpy ${{ matrix.numpy-version }} -c conda-forge
+
     - name: Publish packages
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
-        export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+        export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN2 }}
         export PYTHON_VERSION=${{ matrix.python-version }}
         export NUMPY_VERSION=${{ matrix.numpy-version }}
         python scripts/upload_packages.py
