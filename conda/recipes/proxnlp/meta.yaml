@@ -9,7 +9,7 @@ source:
   path: ../../../proxnlp
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: proxnlp

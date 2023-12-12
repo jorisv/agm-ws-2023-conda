@@ -116,7 +116,7 @@ jobs:
       shell: bash -l {0}
       run: |
         conda activate agm-ws-2023-py${{ matrix.python-version }}
-        export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN2 }}
+        export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
         export PYTHON_VERSION=${{ matrix.python-version }}
         export NUMPY_VERSION=${{ matrix.numpy-version }}
         python scripts/upload_packages.py

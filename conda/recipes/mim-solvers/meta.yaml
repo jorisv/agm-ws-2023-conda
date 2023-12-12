@@ -11,7 +11,7 @@ source:
     - patches/0001-Bump-to-agm-ws-2023-special-0.99.2-version.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x.x') }}
